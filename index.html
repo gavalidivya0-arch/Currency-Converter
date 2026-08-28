@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js for charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Phosphor Icons for matching the minimalist icon style -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Currency Converter</h2>
+                <i class="ph ph-arrow-left arrow-back"></i>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <i class="ph-fill ph-squares-four"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-chart-line-up"></i>
+                    <span>Market Place</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-wallet"></i>
+                    <span>Wallet</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-warning-circle"></i>
+                    <span>Alert</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-arrows-down-up"></i>
+                    <span>Exchange</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="ph ph-gear"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navigation -->
+            <header class="top-nav">
+                <div class="greeting" style="display: none;">
+                    <h2>Welcome! Ebere</h2>
+                </div>
+                
+                <div class="search-bar">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+                
+                <div class="top-nav-right">
+                    <button class="icon-btn"><i class="ph ph-bell"></i></button>
+                    <button class="icon-btn"><i class="ph ph-translate"></i></button>
+                    <div class="divider"></div>
+                    <span class="currency-selector">USD <i class="ph ph-caret-down"></i></span>
+                    <div class="divider"></div>
+                    <button class="icon-btn"><i class="ph ph-sun"></i></button>
+                    <!-- User details disabled -->
+                    <img src="https://i.pravatar.cc/150?img=47" alt="Profile" class="profile-pic" style="display: none;">
+                </div>
+            </header>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                
+                <!-- Popular Loss And Gain -->
+                <section class="card full-width">
+                    <div class="card-header">
+                        <h3>Popular Loss And Gain Currencies Pairs</h3>
+                        <div class="toggle-switch">
+                            <span>Buyer</span>
+                            <div class="switch">
+                                <div class="switch-handle"></div>
+                            </div>
+                            <span class="muted">Seller</span>
+                        </div>
+                    </div>
+                    
+                    <div class="currency-cards">
+                        <!-- Card 1 -->
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <span class="muted-title">USD/NGN</span>
+                            </div>
+                            <div class="mini-card-body">
+                                <div class="icon-circle blue"><i class="ph ph-currency-dollar"></i></div>
+                                <div class="amount-info">
+                                    <span class="amount">312.723<span class="decimals">.79</span></span>
+                                    <span class="change positive">+20.5%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <span class="muted-title">USD/EURO</span>
+                            </div>
+                            <div class="mini-card-body">
+                                <div class="icon-circle blue"><i class="ph ph-currency-dollar"></i></div>
+                                <div class="amount-info">
+                                    <span class="amount">456.723<span class="decimals">.79</span></span>
+                                    <span class="change negative">-12.6%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <span class="muted-title">EURO/USD</span>
+                            </div>
+                            <div class="mini-card-body">
+                                <div class="icon-circle blue"><i class="ph ph-currency-eur"></i></div>
+                                <div class="amount-info">
+                                    <span class="amount">34.723<span class="decimals">.79</span></span>
+                                    <span class="change positive">+30.5%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="mini-card">
+                            <div class="mini-card-header">
+                                <span class="muted-title">YEN/EURO</span>
+                            </div>
+                            <div class="mini-card-body">
+                                <div class="icon-circle blue"><i class="ph ph-currency-jpy"></i></div>
+                                <div class="amount-info">
+                                    <span class="amount">9.568<span class="decimals">.79</span></span>
+                                    <span class="change negative">-9.3%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Statistics Chart -->
+                <section class="card chart-card">
+                    <div class="card-header">
+                        <h3>Statistics</h3>
+                    </div>
+                    <div class="chart-legend-top">
+                        <span class="legend-item"><span class="dot blue"></span> USD</span>
+                        <span class="legend-item"><span class="dot red"></span> EURO</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="lineChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Balance Details -->
+                <section class="card balance-card">
+                    <div class="card-header center">
+                        <h3>Balance Details</h3>
+                    </div>
+                    <div class="balance-content">
+                        <div class="donut-container">
+                            <canvas id="donutChart"></canvas>
+                        </div>
+                        <div class="donut-legend">
+                            <div class="legend-row">
+                                <div><span class="dot dark-blue"></span> USD</div>
+                                <span class="val">2,723.79</span>
+                            </div>
+                            <div class="legend-row">
+                                <div><span class="dot blue"></span> Euro</div>
+                                <span class="val">3,723.79</span>
+                            </div>
+                            <div class="legend-row">
+                                <div><span class="dot purple"></span> Pounds</div>
+                                <span class="val">3,723.79</span>
+                            </div>
+                            <div class="legend-row">
+                                <div><span class="dot gray"></span> Naira</div>
+                                <span class="val">0,723.79</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="account-balance">
+                        <h4>Account Balance</h4>
+                        <h2>$20,000</h2>
+                    </div>
+                </section>
+
+                <!-- Popular Currencies Pairs Table -->
+                <section class="card full-width bottom-table">
+                    <div class="card-header">
+                        <h3 class="uppercase">POPULAR CURRENCIES PAIRS</h3>
+                    </div>
+                    <table class="currency-table">
+                        <tbody>
+                            <tr>
+                                <td>USD/EURO</td>
+                                <td class="table-amount">34.723<span class="decimals">.79</span></td>
+                                <td class="change positive">+12.3%</td>
+                            </tr>
+                            <tr>
+                                <td>EURO/USD</td>
+                                <td class="table-amount">
+                                    <div class="view-details-hover">
+                                        60.723<span class="decimals">.79</span>
+                                        <div class="cursor-mock">
+                                            <span class="tooltip">view details</span>
+                                            <i class="ph-fill ph-cursor"></i>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="change positive">+12.3%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </section>
+
+            </div>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
