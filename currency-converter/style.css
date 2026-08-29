@@ -567,3 +567,57 @@ body {
     color: #000;
     transform: rotate(-15deg);
 }
+
+/* Quick Convert Widget */
+
+/* Form Elements (Converter) */
+.input-group {
+    display: flex; flex-direction: column; margin-bottom: 1.25rem;
+}
+.input-group label {
+    font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.5rem;
+}
+.input-group input, .input-group select {
+    padding: 0.75rem 1rem; border: 1px solid var(--border-color); border-radius: 0.5rem;
+    font-size: 0.95rem; background-color: var(--bg-main); outline: none;
+}
+.currency-selectors {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;
+}
+.currency-selectors .input-group { flex: 1; margin-bottom: 0; }
+.swap-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    background-color: var(--active-bg); border: none; color: var(--primary-blue);
+    cursor: pointer; display: flex; justify-content: center; align-items: center;
+    margin-top: 1.5rem; flex-shrink: 0; transition: transform 0.2s;
+}
+.swap-btn:hover { transform: scale(1.1); }
+.primary-btn {
+    width: 100%; padding: 1rem; background-color: var(--primary-blue);
+    color: white; border: none; border-radius: 0.5rem; font-weight: 700;
+    cursor: pointer; display: flex; justify-content: center; align-items: center;
+    gap: 0.5rem; transition: background 0.2s;
+}
+.primary-btn:hover { background-color: var(--chart-dark-blue); }
+.primary-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.spinner {
+    width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%; border-top-color: white; animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Modal Result Section */
+.result-section {
+    margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+.result-section.hidden { display: none; }
+.converted-result {
+    font-size: 1.5rem; font-weight: 800; color: var(--primary-blue); margin-bottom: 0.5rem;
+}
+.exchange-rate-info { font-size: 0.9rem; color: var(--text-muted); font-weight: 500; }
+.error-text { color: var(--negative); font-size: 0.75rem; margin-top: 0.25rem; display: none; }
+.has-error input { border-color: var(--negative); }
+.has-error .error-text { display: block; }
+

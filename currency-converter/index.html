@@ -23,7 +23,7 @@
             </div>
             
             <nav class="nav-menu">
-                <a href="#" class="nav-item active">
+                <a href="#" class="nav-item active" id="nav-dashboard">
                     <i class="ph-fill ph-squares-four"></i>
                     <span>Dashboard</span>
                 </a>
@@ -39,7 +39,7 @@
                     <i class="ph ph-warning-circle"></i>
                     <span>Alert</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="#" class="nav-item" id="nav-exchange">
                     <i class="ph ph-arrows-down-up"></i>
                     <span>Exchange</span>
                 </a>
@@ -67,7 +67,7 @@
                     <button class="icon-btn"><i class="ph ph-bell"></i></button>
                     <button class="icon-btn"><i class="ph ph-translate"></i></button>
                     <div class="divider"></div>
-                    <span class="currency-selector">USD <i class="ph ph-caret-down"></i></span>
+                    <span class="currency-selector" id="base-currency-selector">USD <i class="ph ph-caret-down"></i></span>
                     <div class="divider"></div>
                     <button class="icon-btn"><i class="ph ph-sun"></i></button>
                     <!-- User details disabled -->
@@ -76,7 +76,7 @@
             </header>
 
             <!-- Dashboard Grid -->
-            <div class="dashboard-grid">
+            <div class="dashboard-grid" id="dashboard-view">
                 
                 <!-- Popular Loss And Gain -->
                 <section class="card full-width">
@@ -95,12 +95,12 @@
                         <!-- Card 1 -->
                         <div class="mini-card">
                             <div class="mini-card-header">
-                                <span class="muted-title">USD/NGN</span>
+                                <span class="muted-title" id="pair1-title">USD/NGN</span>
                             </div>
                             <div class="mini-card-body">
                                 <div class="icon-circle blue"><i class="ph ph-currency-dollar"></i></div>
                                 <div class="amount-info">
-                                    <span class="amount">312.723<span class="decimals">.79</span></span>
+                                    <span class="amount" id="rate-usd-ngn">...</span>
                                     <span class="change positive">+20.5%</span>
                                 </div>
                             </div>
@@ -109,12 +109,12 @@
                         <!-- Card 2 -->
                         <div class="mini-card">
                             <div class="mini-card-header">
-                                <span class="muted-title">USD/EURO</span>
+                                <span class="muted-title" id="pair2-title">USD/EUR</span>
                             </div>
                             <div class="mini-card-body">
                                 <div class="icon-circle blue"><i class="ph ph-currency-dollar"></i></div>
                                 <div class="amount-info">
-                                    <span class="amount">456.723<span class="decimals">.79</span></span>
+                                    <span class="amount" id="rate-usd-eur">...</span>
                                     <span class="change negative">-12.6%</span>
                                 </div>
                             </div>
@@ -123,12 +123,12 @@
                         <!-- Card 3 -->
                         <div class="mini-card">
                             <div class="mini-card-header">
-                                <span class="muted-title">EURO/USD</span>
+                                <span class="muted-title" id="pair3-title">EUR/USD</span>
                             </div>
                             <div class="mini-card-body">
                                 <div class="icon-circle blue"><i class="ph ph-currency-eur"></i></div>
                                 <div class="amount-info">
-                                    <span class="amount">34.723<span class="decimals">.79</span></span>
+                                    <span class="amount" id="rate-eur-usd">...</span>
                                     <span class="change positive">+30.5%</span>
                                 </div>
                             </div>
@@ -137,12 +137,12 @@
                         <!-- Card 4 -->
                         <div class="mini-card">
                             <div class="mini-card-header">
-                                <span class="muted-title">YEN/EURO</span>
+                                <span class="muted-title" id="pair4-title">JPY/EUR</span>
                             </div>
                             <div class="mini-card-body">
                                 <div class="icon-circle blue"><i class="ph ph-currency-jpy"></i></div>
                                 <div class="amount-info">
-                                    <span class="amount">9.568<span class="decimals">.79</span></span>
+                                    <span class="amount" id="rate-jpy-eur">...</span>
                                     <span class="change negative">-9.3%</span>
                                 </div>
                             </div>
@@ -194,27 +194,27 @@
                     </div>
                     <div class="account-balance">
                         <h4>Account Balance</h4>
-                        <h2>$20,000</h2>
+                        <h2 id="account-balance-total">$20,000.00</h2>
                     </div>
                 </section>
 
                 <!-- Popular Currencies Pairs Table -->
-                <section class="card full-width bottom-table">
+                <section class="card bottom-table">
                     <div class="card-header">
                         <h3 class="uppercase">POPULAR CURRENCIES PAIRS</h3>
                     </div>
                     <table class="currency-table">
                         <tbody>
                             <tr>
-                                <td>USD/EURO</td>
-                                <td class="table-amount">34.723<span class="decimals">.79</span></td>
+                                <td id="table-pair1-name">USD/EUR</td>
+                                <td class="table-amount" id="table-rate-usd-eur">...</td>
                                 <td class="change positive">+12.3%</td>
                             </tr>
                             <tr>
-                                <td>EURO/USD</td>
+                                <td id="table-pair2-name">EUR/USD</td>
                                 <td class="table-amount">
                                     <div class="view-details-hover">
-                                        60.723<span class="decimals">.79</span>
+                                        <span id="table-rate-eur-usd">...</span>
                                         <div class="cursor-mock">
                                             <span class="tooltip">view details</span>
                                             <i class="ph-fill ph-cursor"></i>
@@ -227,7 +227,54 @@
                     </table>
                 </section>
 
+                <!-- Quick Convert Widget -->
+                <section class="card quick-convert-card">
+                    <div class="card-header">
+                        <h3>Quick Convert</h3>
+                    </div>
+                    <form id="converter-form" aria-label="Currency conversion form" class="widget-form">
+                        <div class="input-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" id="amount" name="amount" placeholder="Enter amount" value="1" min="0" step="any" required>
+                            <span id="amount-error" class="error-text" aria-live="polite"></span>
+                        </div>
+        
+                        <div class="currency-selectors">
+                            <div class="input-group">
+                                <label for="from-currency">From</label>
+                                <select id="from-currency" name="from-currency" aria-label="Select source currency">
+                                    <!-- Options populated by JS -->
+                                </select>
+                            </div>
+        
+                            <button type="button" id="swap-btn" class="swap-btn" aria-label="Swap currencies" title="Swap currencies">
+                                <i class="ph ph-arrows-left-right"></i>
+                            </button>
+        
+                            <div class="input-group">
+                                <label for="to-currency">To</label>
+                                <select id="to-currency" name="to-currency" aria-label="Select target currency">
+                                    <!-- Options populated by JS -->
+                                </select>
+                            </div>
+                        </div>
+        
+                        <button type="submit" id="convert-btn" class="primary-btn">
+                            <span class="btn-text">Convert Currency</span>
+                            <span class="spinner" style="display: none;"></span>
+                        </button>
+                    </form>
+        
+                    <div id="result-section" class="result-section hidden" aria-live="polite">
+                        <div class="converted-result" id="converted-result">
+                        </div>
+                        <div class="exchange-rate-info" id="exchange-rate-info">
+                        </div>
+                    </div>
+                </section>
+
             </div>
+
         </main>
     </div>
     
