@@ -217,7 +217,7 @@ async function updateDashboard(base) {
     
     const baseSelector = document.getElementById('base-currency-selector');
     if (baseSelector) {
-        baseSelector.innerHTML = `${base} <i class="ph ph-caret-down"></i>`;
+        baseSelector.textContent = base;
     }
     
     const targets = ['NGN', 'EUR', 'GBP', 'JPY']; 
