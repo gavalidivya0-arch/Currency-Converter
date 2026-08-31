@@ -28,8 +28,8 @@ const SUPPORTED_CURRENCIES = [
 // App State
 let appState = {
     baseCurrency: 'USD',
-    userName: 'Ebere',
-    userEmail: 'ebere@example.com',
+    userName: 'User',
+    userEmail: 'user@example.com',
     darkMode: false,
     toastNotifications: true,
     wallets: {
@@ -833,7 +833,7 @@ function setupEventListeners() {
     if (profileForm) {
         profileForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            appState.userName = document.getElementById('settings-user-name').value.trim() || 'Ebere';
+            appState.userName = document.getElementById('settings-user-name').value.trim() || 'User';
             appState.userEmail = document.getElementById('settings-user-email').value.trim();
             const newBase = document.getElementById('settings-default-base').value;
             
