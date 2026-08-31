@@ -69,7 +69,11 @@
                     <span class="currency-selector" id="base-currency-selector">USD</span>
                     <div class="divider"></div>
                     <button class="icon-btn" id="theme-toggle-btn" title="Toggle Theme"><i class="ph ph-sun" id="theme-icon"></i></button>
-                    <div class="user-avatar-pill" id="user-avatar-pill" title="View Profile & Settings">
+                    <button class="top-nav-login-btn" id="top-nav-login-btn" title="Log In to Your Account">
+                        <i class="ph ph-sign-in"></i>
+                        <span>Login</span>
+                    </button>
+                    <div class="user-avatar-pill hidden" id="user-avatar-pill" title="View Profile & Settings">
                         <i class="ph ph-user-circle" style="font-size: 1.25rem; color: var(--primary-blue);"></i>
                         <span class="user-name" id="top-nav-user-name">User</span>
                     </div>
@@ -611,7 +615,10 @@
                                         <option value="AUD">AUD - Australian Dollar</option>
                                     </select>
                                 </div>
-                                <button type="submit" class="primary-btn"><i class="ph ph-floppy-disk"></i> Save Profile Settings</button>
+                                <div class="profile-actions-row">
+                                    <button type="submit" class="primary-btn"><i class="ph ph-floppy-disk"></i> Save Profile Settings</button>
+                                    <button type="button" id="profile-logout-btn" class="btn btn-danger-outline hidden"><i class="ph ph-sign-out"></i> Log Out</button>
+                                </div>
                             </form>
                         </section>
 
@@ -686,6 +693,40 @@
         </div>
     </div>
     
+    <!-- Login Modal -->
+    <div id="login-modal" class="modal-overlay hidden">
+        <div class="modal-card login-modal-card">
+            <div class="modal-header">
+                <div class="login-modal-title-group">
+                    <i class="ph-fill ph-user-circle login-header-icon"></i>
+                    <div>
+                        <h3>User Authentication</h3>
+                        <p class="text-sm muted">Sign in to access your profile & settings</p>
+                    </div>
+                </div>
+                <button class="modal-close-btn" id="login-modal-close"><i class="ph ph-x"></i></button>
+            </div>
+            <form id="login-form" class="widget-form">
+                <div class="input-group">
+                    <label for="login-user-name">Full Name / Username</label>
+                    <input type="text" id="login-user-name" placeholder="e.g. Ebere" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-user-email">Email Address</label>
+                    <input type="email" id="login-user-email" placeholder="ebere@example.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-user-password">Password</label>
+                    <input type="password" id="login-user-password" placeholder="••••••••" required>
+                </div>
+                <div class="modal-footer-btns">
+                    <button type="button" class="btn btn-secondary" id="login-modal-cancel">Cancel</button>
+                    <button type="submit" class="btn btn-primary" id="login-modal-submit"><i class="ph ph-sign-in"></i> Log In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

@@ -702,6 +702,70 @@ body.dark-mode {
     color: var(--text-dark);
 }
 
+/* Top Nav Login Button */
+.top-nav-login-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--primary-blue);
+    color: white;
+    padding: 0.45rem 1rem;
+    border-radius: 2rem;
+    border: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(30, 30, 120, 0.15);
+}
+.top-nav-login-btn:hover {
+    background-color: var(--chart-dark-blue);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(30, 30, 120, 0.25);
+}
+
+.profile-actions-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+}
+.profile-actions-row .primary-btn {
+    flex: 1;
+}
+
+.btn-danger-outline {
+    background: transparent;
+    border: 1px solid var(--negative);
+    color: var(--negative);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+}
+.btn-danger-outline:hover {
+    background: var(--negative);
+    color: white;
+}
+
+/* Login Modal Styling */
+.login-modal-card {
+    max-width: 420px;
+    width: 90%;
+}
+.login-modal-title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.login-header-icon {
+    font-size: 2.2rem;
+    color: var(--primary-blue);
+}
+
 .badge-dot {
     width: 8px;
     height: 8px;

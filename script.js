@@ -28,8 +28,9 @@ const SUPPORTED_CURRENCIES = [
 // App State
 let appState = {
     baseCurrency: 'USD',
-    userName: 'User',
-    userEmail: 'user@example.com',
+    isLoggedIn: false,
+    userName: '',
+    userEmail: '',
     darkMode: false,
     toastNotifications: true,
     wallets: {
@@ -62,6 +63,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     initCharts();
     populateCurrencies();
     setupEventListeners();
+    renderProfileUI();
     await updateDashboard(appState.baseCurrency);
     renderMarketPlace();
     renderWallet();
@@ -692,6 +694,79 @@ async function handleExecuteExchange(e) {
     showToast(`Exchange successful! Received ${formatCurrency(receivedAmount, to)}`, 'success');
 }
 
+// --- Profile & Authentication Logic ---
+function renderProfileUI() {
+    const loginBtn = document.getElementById('top-nav-login-btn');
+    const userPill = document.getElementById('user-avatar-pill');
+    const topNavUserName = document.getElementById('top-nav-user-name');
+    const logoutBtn = document.getElementById('profile-logout-btn');
+
+    if (appState.isLoggedIn) {
+        if (loginBtn) loginBtn.classList.add('hidden');
+        if (userPill) userPill.classList.remove('hidden');
+        if (topNavUserName) topNavUserName.textContent = appState.userName || 'User';
+        if (logoutBtn) logoutBtn.classList.remove('hidden');
+    } else {
+        if (loginBtn) loginBtn.classList.remove('hidden');
+        if (userPill) userPill.classList.add('hidden');
+        if (topNavUserName) topNavUserName.textContent = 'Login';
+        if (logoutBtn) logoutBtn.classList.add('hidden');
+    }
+}
+
+function openLoginModal() {
+    const modal = document.getElementById('login-modal');
+    if (modal) {
+        const nameInput = document.getElementById('login-user-name');
+        const emailInput = document.getElementById('login-user-email');
+        const passInput = document.getElementById('login-user-password');
+        if (nameInput) nameInput.value = appState.userName || '';
+        if (emailInput) emailInput.value = appState.userEmail || '';
+        if (passInput) passInput.value = '';
+        modal.classList.remove('hidden');
+    }
+}
+
+function closeLoginModal() {
+    const modal = document.getElementById('login-modal');
+    if (modal) modal.classList.add('hidden');
+}
+
+function handleLoginSubmit(e) {
+    e.preventDefault();
+    const nameInput = document.getElementById('login-user-name');
+    const emailInput = document.getElementById('login-user-email');
+    
+    const userName = nameInput ? nameInput.value.trim() : '';
+    const userEmail = emailInput ? emailInput.value.trim() : '';
+
+    if (!userName) {
+        showToast('Please enter your name to log in', 'warning');
+        return;
+    }
+
+    appState.isLoggedIn = true;
+    appState.userName = userName;
+    appState.userEmail = userEmail;
+
+    saveStateToStorage();
+    renderProfileUI();
+    renderSettings();
+    closeLoginModal();
+    showToast(`Welcome back, ${userName}!`, 'success');
+}
+
+function handleLogout() {
+    appState.isLoggedIn = false;
+    appState.userName = '';
+    appState.userEmail = '';
+
+    saveStateToStorage();
+    renderProfileUI();
+    renderSettings();
+    showToast('Logged out successfully', 'info');
+}
+
 // --- Settings Logic ---
 function renderSettings() {
     const nameInput = document.getElementById('settings-user-name');
@@ -699,14 +774,14 @@ function renderSettings() {
     const baseSelect = document.getElementById('settings-default-base');
     const darkModeToggle = document.getElementById('settings-dark-mode-toggle');
     const toastToggle = document.getElementById('settings-toast-toggle');
-    const topNavUserName = document.getElementById('top-nav-user-name');
 
-    if (nameInput) nameInput.value = appState.userName;
-    if (emailInput) emailInput.value = appState.userEmail;
+    if (nameInput) nameInput.value = appState.userName || '';
+    if (emailInput) emailInput.value = appState.userEmail || '';
     if (baseSelect) baseSelect.value = appState.baseCurrency;
     if (darkModeToggle) darkModeToggle.checked = appState.darkMode;
     if (toastToggle) toastToggle.checked = appState.toastNotifications;
-    if (topNavUserName) topNavUserName.textContent = appState.userName;
+    
+    renderProfileUI();
 }
 
 // --- Event Listeners Setup ---
@@ -763,10 +838,26 @@ function setupEventListeners() {
         alertNavBtn.addEventListener('click', () => switchView('alert'));
     }
 
+    const topNavLoginBtn = document.getElementById('top-nav-login-btn');
+    if (topNavLoginBtn) {
+        topNavLoginBtn.addEventListener('click', openLoginModal);
+    }
+
     const userAvatarPill = document.getElementById('user-avatar-pill');
     if (userAvatarPill) {
         userAvatarPill.addEventListener('click', () => switchView('settings'));
     }
+
+    const loginClose = document.getElementById('login-modal-close');
+    const loginCancel = document.getElementById('login-modal-cancel');
+    if (loginClose) loginClose.addEventListener('click', closeLoginModal);
+    if (loginCancel) loginCancel.addEventListener('click', closeLoginModal);
+
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) loginForm.addEventListener('submit', handleLoginSubmit);
+
+    const logoutBtn = document.getElementById('profile-logout-btn');
+    if (logoutBtn) logoutBtn.addEventListener('click', handleLogout);
 
     // Dashboard Quick Converter Form
     const converterForm = document.getElementById('converter-form');
@@ -838,12 +929,19 @@ function setupEventListeners() {
     if (profileForm) {
         profileForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            appState.userName = document.getElementById('settings-user-name').value.trim() || 'User';
-            appState.userEmail = document.getElementById('settings-user-email').value.trim();
+            const newName = document.getElementById('settings-user-name').value.trim();
+            const newEmail = document.getElementById('settings-user-email').value.trim();
             const newBase = document.getElementById('settings-default-base').value;
+            
+            if (newName) {
+                appState.userName = newName;
+                appState.userEmail = newEmail;
+                appState.isLoggedIn = true;
+            }
             
             saveStateToStorage();
             renderSettings();
+            renderProfileUI();
             updateDashboard(newBase);
             showToast('Profile settings saved successfully', 'success');
         });
