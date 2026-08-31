@@ -687,8 +687,13 @@ body.dark-mode {
     align-items: center;
     gap: 0.5rem;
     background-color: var(--bg-main);
-    padding: 0.25rem 0.75rem 0.25rem 0.25rem;
+    padding: 0.35rem 0.85rem;
     border-radius: 2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.user-avatar-pill:hover {
+    background-color: var(--active-bg);
 }
 
 .user-name {

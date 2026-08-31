@@ -763,6 +763,11 @@ function setupEventListeners() {
         alertNavBtn.addEventListener('click', () => switchView('alert'));
     }
 
+    const userAvatarPill = document.getElementById('user-avatar-pill');
+    if (userAvatarPill) {
+        userAvatarPill.addEventListener('click', () => switchView('settings'));
+    }
+
     // Dashboard Quick Converter Form
     const converterForm = document.getElementById('converter-form');
     if (converterForm) {
