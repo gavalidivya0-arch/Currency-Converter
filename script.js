@@ -696,20 +696,18 @@ async function handleExecuteExchange(e) {
 
 // --- Profile & Authentication Logic ---
 function renderProfileUI() {
-    const loginBtn = document.getElementById('top-nav-login-btn');
     const userPill = document.getElementById('user-avatar-pill');
     const topNavUserName = document.getElementById('top-nav-user-name');
     const logoutBtn = document.getElementById('profile-logout-btn');
+    const userIcon = userPill ? userPill.querySelector('i') : null;
 
     if (appState.isLoggedIn) {
-        if (loginBtn) loginBtn.classList.add('hidden');
-        if (userPill) userPill.classList.remove('hidden');
         if (topNavUserName) topNavUserName.textContent = appState.userName || 'User';
+        if (userIcon) userIcon.className = 'ph ph-user-circle';
         if (logoutBtn) logoutBtn.classList.remove('hidden');
     } else {
-        if (loginBtn) loginBtn.classList.remove('hidden');
-        if (userPill) userPill.classList.add('hidden');
         if (topNavUserName) topNavUserName.textContent = 'Login';
+        if (userIcon) userIcon.className = 'ph ph-sign-in';
         if (logoutBtn) logoutBtn.classList.add('hidden');
     }
 }
@@ -838,14 +836,15 @@ function setupEventListeners() {
         alertNavBtn.addEventListener('click', () => switchView('alert'));
     }
 
-    const topNavLoginBtn = document.getElementById('top-nav-login-btn');
-    if (topNavLoginBtn) {
-        topNavLoginBtn.addEventListener('click', openLoginModal);
-    }
-
     const userAvatarPill = document.getElementById('user-avatar-pill');
     if (userAvatarPill) {
-        userAvatarPill.addEventListener('click', () => switchView('settings'));
+        userAvatarPill.addEventListener('click', () => {
+            if (appState.isLoggedIn) {
+                switchView('settings');
+            } else {
+                openLoginModal();
+            }
+        });
     }
 
     const loginClose = document.getElementById('login-modal-close');
