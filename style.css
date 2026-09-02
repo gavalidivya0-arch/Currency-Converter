@@ -309,6 +309,23 @@ body {
     position: absolute;
     top: 3px;
     left: 3px;
+    transition: transform 0.2s ease;
+}
+
+.toggle-switch.seller-active .switch-handle {
+    transform: translateX(14px);
+}
+
+.toggle-switch.seller-active #label-buyer {
+    color: var(--text-muted);
+}
+
+.toggle-switch.seller-active #label-seller {
+    color: var(--text-dark);
+}
+
+.toggle-label {
+    transition: color 0.2s ease;
 }
 
 /* Mini Cards */

@@ -869,6 +869,13 @@ function setupEventListeners() {
     const swapBtn = document.getElementById('swap-btn');
     if (swapBtn) swapBtn.addEventListener('click', swapDashboardCurrencies);
 
+    const buyerSellerToggle = document.getElementById('buyer-seller-toggle');
+    if (buyerSellerToggle) {
+        buyerSellerToggle.addEventListener('click', () => {
+            buyerSellerToggle.classList.toggle('seller-active');
+        });
+    }
+
     // Marketplace Search & Filters
     const marketSearch = document.getElementById('marketplace-search-input');
     if (marketSearch) {
